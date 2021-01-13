@@ -1,45 +1,36 @@
 var alpha = 0.1;
+var output = 5;
 
-let equation = "x[i]**3+5*x[i]**2+x[i]"
-
-var x = [...Array(21).keys()];
-var y = [];
-
-for (var i = 0; i < x.length; i++) {
-    x[i] = x[i] / 2 - 5;
-    y.push(eval(equation));
+function lineGraph(z, y) {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: z,
+            datasets: [{
+                label: 'Equation',
+                borderColor: "rgba(75,192,192,1)",
+                borderWidth: 2,
+                fill: false,
+                data: y
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
 }
 
-// myChart.render() will update the board
-
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: x,
-        datasets: [{
-            label: 'Equation',
-            borderColor: "rgba(75,192,192,1)",
-            borderWidth: 2,
-            fill: false,
-            data: y
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
-
 function gdGraph() {
-    let points = gDescent(document.getElementById("volume").value, 5);
-
-    var ctx = document.getElementById('gDescent').getContext('2d');
+    let canvas = document.getElementById('gDescent');
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     var gdGraph = new Chart(ctx, {
         type: 'line',
         data: {
@@ -66,8 +57,24 @@ function gdGraph() {
 }
 
 function update() {
-    points = gDescent(document.getElementById("volume").value, 5);
-    gdGraph()
+    if (document.getElementById("equation").value != "") {
+        equation = document.getElementById("equation").value;
+        equation = equation.replaceAll("^", "**").replaceAll("x", "(x)");
+    }
+
+    var z = [...Array(21).keys()];
+    var y = [];
+
+    for (var i = 0; i < z.length; i++) {
+        z[i] = z[i] / 2 - (z.length / 4);
+        let x = z[i];
+        y.push(parse(equation, x));
+    }
+
+    points = gDescent(document.getElementById("volume").value, output);
+
+    gdGraph();
+    lineGraph(z, y);
     document.getElementById("volume-counter").innerText = document.getElementById("volume").value
     document.getElementById("final").innerText = points[1][points[1].length - 1];
 }

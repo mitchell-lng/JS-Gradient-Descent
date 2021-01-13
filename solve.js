@@ -1,7 +1,3 @@
-function rfunc(z) {
-    return z**3+5*z**2+z;
-}
-
 function getChange(x) {
     if (alpha != "") {
         return x * alpha;
@@ -11,12 +7,12 @@ function getChange(x) {
 
 function gDescent(steps, goal) {
     var points = [[], []];
-    let val = 1;
+    let val = 0;
 
     for (var i = 0; i < steps; i++) {
         points[0].push(parseFloat(val.toFixed(15)));
-        points[1].push(rfunc(val));
-        val += getChange(goal - rfunc(val));
+        points[1].push(parse(equation, val));
+        val += getChange(goal - parse(equation, val));
     }
 
     return points;
