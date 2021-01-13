@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gradient Descent</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+<body>
+    <header>
+        <section class="hero is-primary">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        Gradient Descent
+                    </h1>
+                    <h2 class="subtitle">
+                        Single Variable
+                    </h2>
+                </div>
+            </div>
+        </section>
+    </header>
+    <main class="m-6">
+        <div class="columns">
+            <div class="column" style="text-align: center;">
+                <canvas id="myChart" width="400" height="400"></canvas>
+                <p>Equation:<br>y = x^3 + 5x^2 + x</p>
+            </div>
+            <div class="column" style="text-align: center">
+                <canvas id="gDescent" width="400" height="400"></canvas>
+                <p>X Axis labels are rounded for brevity</p>
+            </div>
+            <div class="column is-one-quarter">
+                <div>
+                    <label for="volume">Step: 0 - 100</label>
+                    <input type="range" id="volume" name="volume" min="0" max="100" style="margin-top: auto; margin-botom: auto;">
+                    <p id="volume-counter" style="display: inline-block">50</p>
+                    <script>
+                        document.getElementById("volume").addEventListener('change', (event) => {
+                            update();
+                        });
+                    </script>
+                </div>
+                <div>
+                    <label for="volume">Change Alpha</label>
+                    <input type="number" id="alpha" name="volume" placeholder="0.1">
+                    <script>
+                        document.getElementById("alpha").addEventListener('change', (event) => {
+                            alpha = document.getElementById("alpha").value;
+                            update();
+                        });
+                    </script>
+                </div>
+                <div>
+                    <p>Final Output: <span id="final"></span></p>
+                </div>
+            </div>
+        </div>
+        <script src="./solve.js"></script>
+        <script src="./graph.js"></script>
+    </main>
+</body>
+</html>
