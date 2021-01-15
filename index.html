@@ -51,12 +51,11 @@
                         </script>
                     </div>
                     <div class="field">
-                        <label for="volume" class="label">Step: 0 - 100</label>
+                        <label for="volume" class="label">Step: <span id="volume-counter">500</span></label>
                         <div class="control">
-                            <input type="range" id="volume" name="volume" min="0" max="100">
-                            <p id="volume-counter" style="display: inline-block">50</p>
-
+                            <input class="input" type="number" id="volume" name="volume" min="0" max="1000" placeholder="500" value="50">
                         </div>
+
                     </div>
                     <script>
                         document.getElementById("volume").addEventListener('change', (event) => {
@@ -80,10 +79,11 @@
                 </div>
                 <div>
                     <div class="field">
-                        <label for="volume" class="label">Change Alpha</label>
+                        <label for="volume" class="label">Initial Alpha</label>
                         <div class="control">
                             <input type="number" class="input" id="alpha" name="volume" placeholder="0.1">
                         </div>
+                        <p class="help">The alpha will slowly decrease over time in order to increase accuracy</p>
                     </div>
                     <script>
                         document.getElementById("alpha").addEventListener('change', (event) => {
@@ -93,7 +93,8 @@
                     </script>
                 </div>
                 <div>
-                    <p>Final Input: <span id="final"></span></p>
+                    <p>Final Input: <span id="final-in"></span></p>
+                    <p>Final Output: <span id="final-out"></span></p>
                 </div>
             </div>
         </div>

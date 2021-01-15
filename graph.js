@@ -76,7 +76,8 @@ function update() {
     gdGraph();
     lineGraph(z, y);
     document.getElementById("volume-counter").innerText = document.getElementById("volume").value
-    document.getElementById("final").innerText = points[0][points[0].length - 1];
+    document.getElementById("final-in").innerText = points[0][points[0].length - 1];
+    document.getElementById("final-out").innerText = points[1][points[1].length - 1];
     document.getElementById("equation-out").innerHTML = equation;
 }
 
